@@ -28,198 +28,208 @@ jobs:
       - name: Install pytest
         run: pip install -r requirements.txt
 
-      - name: Ex 1 - List set up
-        id: ex1_initial_list
+      - name: Ex 1 - Initialise
+        id: ex1_initialise
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 1 - List set up
-          command: pytest test_assignment.py::test1_initial_list
+          test-name: Ex 1 - Initialise
+          command: pytest test_assignment.py::test1_initialise
           timeout: 2
           max-score: 1
 
-      - name: Ex 1 - Rows are separate
-        id: ex1_rows_are_separate
+      - name: Ex 1 - Initialise resets
+        id: ex1_initialise_resets
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 1 - Rows are separate
-          command: pytest test_assignment.py::test1_rows_are_separate
+          test-name: Ex 1 - Initialise resets
+          command: pytest test_assignment.py::test1_initialise_resets
           timeout: 2
           max-score: 1
 
-      - name: Ex 1 - IsEmpty
-        id: ex1_is_empty
+      - name: Ex 1 - OutputNodes
+        id: ex1_output_nodes
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 1 - IsEmpty
-          command: pytest test_assignment.py::test1_is_empty
+          test-name: Ex 1 - OutputNodes
+          command: pytest test_assignment.py::test1_output_nodes
           timeout: 2
           max-score: 1
 
-      - name: Ex 1 - IsFull
-        id: ex1_is_full
+      - name: Ex 1 - OutputNodes empty
+        id: ex1_output_empty
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 1 - IsFull
-          command: pytest test_assignment.py::test1_is_full
+          test-name: Ex 1 - OutputNodes empty
+          command: pytest test_assignment.py::test1_output_empty
           timeout: 2
           max-score: 1
 
-      - name: Ex 2 - Traverse
-        id: ex2_traverse
+      - name: Ex 2 - Insert into empty list
+        id: ex2_insert_into_empty
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 2 - Traverse
-          command: pytest test_assignment.py::test2_traverse
+          test-name: Ex 2 - Insert into empty list
+          command: pytest test_assignment.py::test2_insert_into_empty
           timeout: 2
           max-score: 1
 
-      - name: Ex 2 - Traverse empty
-        id: ex2_traverse_empty
+      - name: Ex 2 - Insert in middle
+        id: ex2_insert_middle
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 2 - Traverse empty
-          command: pytest test_assignment.py::test2_traverse_empty
+          test-name: Ex 2 - Insert in middle
+          command: pytest test_assignment.py::test2_insert_middle
           timeout: 2
           max-score: 1
 
-      - name: Ex 2 - Traverse keeps list
-        id: ex2_traverse_keeps_list
+      - name: Ex 2 - Insert new first
+        id: ex2_insert_new_first
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 2 - Traverse keeps list
-          command: pytest test_assignment.py::test2_traverse_keeps_list
+          test-name: Ex 2 - Insert new first
+          command: pytest test_assignment.py::test2_insert_new_first
           timeout: 2
           max-score: 1
 
-      - name: Ex 3 - Search
-        id: ex3_search
+      - name: Ex 2 - Insert new last
+        id: ex2_insert_new_last
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 3 - Search
-          command: pytest test_assignment.py::test3_search
+          test-name: Ex 2 - Insert new last
+          command: pytest test_assignment.py::test2_insert_new_last
           timeout: 2
           max-score: 1
 
-      - name: Ex 3 - CountNodes
-        id: ex3_count_nodes
+      - name: Ex 2 - Insert many and full
+        id: ex2_insert_many
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 3 - CountNodes
-          command: pytest test_assignment.py::test3_count_nodes
+          test-name: Ex 2 - Insert many and full
+          command: pytest test_assignment.py::test2_insert_many
           timeout: 2
           max-score: 1
 
-      - name: Ex 4 - InsertFront empty list
-        id: ex4_insert_front_empty
+      - name: Ex 3 - Delete middle and last
+        id: ex3_delete_middle_and_last
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 4 - InsertFront empty list
-          command: pytest test_assignment.py::test4_insert_front_empty
+          test-name: Ex 3 - Delete middle and last
+          command: pytest test_assignment.py::test3_delete_middle_and_last
           timeout: 2
           max-score: 1
 
-      - name: Ex 4 - InsertFront
-        id: ex4_insert_front_sample
+      - name: Ex 3 - Delete first
+        id: ex3_delete_first
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 4 - InsertFront
-          command: pytest test_assignment.py::test4_insert_front_sample
+          test-name: Ex 3 - Delete first
+          command: pytest test_assignment.py::test3_delete_first
           timeout: 2
           max-score: 1
 
-      - name: Ex 4 - InsertFront when full
-        id: ex4_insert_front_when_full
+      - name: Ex 3 - Not found
+        id: ex3_not_found
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 4 - InsertFront when full
-          command: pytest test_assignment.py::test4_insert_front_when_full
+          test-name: Ex 3 - Not found
+          command: pytest test_assignment.py::test3_not_found
           timeout: 2
           max-score: 1
 
-      - name: Ex 5 - InsertEnd empty list
-        id: ex5_insert_end_empty
+      - name: Ex 3 - Back to free list
+        id: ex3_node_goes_back_to_free_list
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 5 - InsertEnd empty list
-          command: pytest test_assignment.py::test5_insert_end_empty
+          test-name: Ex 3 - Back to free list
+          command: pytest test_assignment.py::test3_node_goes_back_to_free_list
           timeout: 2
           max-score: 1
 
-      - name: Ex 5 - InsertEnd
-        id: ex5_insert_end_sample
+      - name: Ex 4 - LoadFromFile
+        id: ex4_load_from_file
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 5 - InsertEnd
-          command: pytest test_assignment.py::test5_insert_end_sample
+          test-name: Ex 4 - LoadFromFile
+          command: pytest test_assignment.py::test4_load_from_file
           timeout: 2
           max-score: 1
 
-      - name: Ex 5 - InsertEnd when full
-        id: ex5_insert_end_when_full
+      - name: Ex 4 - Too many numbers
+        id: ex4_load_too_many
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 5 - InsertEnd when full
-          command: pytest test_assignment.py::test5_insert_end_when_full
+          test-name: Ex 4 - Too many numbers
+          command: pytest test_assignment.py::test4_load_too_many
           timeout: 2
           max-score: 1
 
-      - name: Ex 6 - Delete middle and last
-        id: ex6_delete_middle_and_last
+      - name: Ex 4 - Starts empty
+        id: ex4_load_starts_empty
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 6 - Delete middle and last
-          command: pytest test_assignment.py::test6_delete_middle_and_last
+          test-name: Ex 4 - Starts empty
+          command: pytest test_assignment.py::test4_load_starts_empty
           timeout: 2
           max-score: 1
 
-      - name: Ex 6 - Delete first
-        id: ex6_delete_first
+      - name: Ex 4 - File not found
+        id: ex4_file_not_found
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 6 - Delete first
-          command: pytest test_assignment.py::test6_delete_first
+          test-name: Ex 4 - File not found
+          command: pytest test_assignment.py::test4_file_not_found
           timeout: 2
           max-score: 1
 
-      - name: Ex 6 - Not found
-        id: ex6_not_found
+      - name: Ex 5 - Reverse
+        id: ex5_reverse
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 6 - Not found
-          command: pytest test_assignment.py::test6_not_found
+          test-name: Ex 5 - Reverse
+          command: pytest test_assignment.py::test5_reverse
           timeout: 2
           max-score: 1
 
-      - name: Ex 6 - Back to free list
-        id: ex6_node_goes_back_to_free_list
+      - name: Ex 5 - Data does not move
+        id: ex5_data_does_not_move
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: Ex 6 - Back to free list
-          command: pytest test_assignment.py::test6_node_goes_back_to_free_list
+          test-name: Ex 5 - Data does not move
+          command: pytest test_assignment.py::test5_data_does_not_move
+          timeout: 2
+          max-score: 1
+
+      - name: Ex 5 - Reverse small lists
+        id: ex5_reverse_small
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Ex 5 - Reverse small lists
+          command: pytest test_assignment.py::test5_reverse_small
           timeout: 2
           max-score: 1
 
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
         env:
-          EX1_INITIAL_LIST_RESULTS: "${{ steps.ex1_initial_list.outputs.result }}"
-          EX1_ROWS_ARE_SEPARATE_RESULTS: "${{ steps.ex1_rows_are_separate.outputs.result }}"
-          EX1_IS_EMPTY_RESULTS: "${{ steps.ex1_is_empty.outputs.result }}"
-          EX1_IS_FULL_RESULTS: "${{ steps.ex1_is_full.outputs.result }}"
-          EX2_TRAVERSE_RESULTS: "${{ steps.ex2_traverse.outputs.result }}"
-          EX2_TRAVERSE_EMPTY_RESULTS: "${{ steps.ex2_traverse_empty.outputs.result }}"
-          EX2_TRAVERSE_KEEPS_LIST_RESULTS: "${{ steps.ex2_traverse_keeps_list.outputs.result }}"
-          EX3_SEARCH_RESULTS: "${{ steps.ex3_search.outputs.result }}"
-          EX3_COUNT_NODES_RESULTS: "${{ steps.ex3_count_nodes.outputs.result }}"
-          EX4_INSERT_FRONT_EMPTY_RESULTS: "${{ steps.ex4_insert_front_empty.outputs.result }}"
-          EX4_INSERT_FRONT_SAMPLE_RESULTS: "${{ steps.ex4_insert_front_sample.outputs.result }}"
-          EX4_INSERT_FRONT_WHEN_FULL_RESULTS: "${{ steps.ex4_insert_front_when_full.outputs.result }}"
-          EX5_INSERT_END_EMPTY_RESULTS: "${{ steps.ex5_insert_end_empty.outputs.result }}"
-          EX5_INSERT_END_SAMPLE_RESULTS: "${{ steps.ex5_insert_end_sample.outputs.result }}"
-          EX5_INSERT_END_WHEN_FULL_RESULTS: "${{ steps.ex5_insert_end_when_full.outputs.result }}"
-          EX6_DELETE_MIDDLE_AND_LAST_RESULTS: "${{ steps.ex6_delete_middle_and_last.outputs.result }}"
-          EX6_DELETE_FIRST_RESULTS: "${{ steps.ex6_delete_first.outputs.result }}"
-          EX6_NOT_FOUND_RESULTS: "${{ steps.ex6_not_found.outputs.result }}"
-          EX6_NODE_GOES_BACK_TO_FREE_LIST_RESULTS: "${{ steps.ex6_node_goes_back_to_free_list.outputs.result }}"
+          EX1_INITIALISE_RESULTS: "${{ steps.ex1_initialise.outputs.result }}"
+          EX1_INITIALISE_RESETS_RESULTS: "${{ steps.ex1_initialise_resets.outputs.result }}"
+          EX1_OUTPUT_NODES_RESULTS: "${{ steps.ex1_output_nodes.outputs.result }}"
+          EX1_OUTPUT_EMPTY_RESULTS: "${{ steps.ex1_output_empty.outputs.result }}"
+          EX2_INSERT_INTO_EMPTY_RESULTS: "${{ steps.ex2_insert_into_empty.outputs.result }}"
+          EX2_INSERT_MIDDLE_RESULTS: "${{ steps.ex2_insert_middle.outputs.result }}"
+          EX2_INSERT_NEW_FIRST_RESULTS: "${{ steps.ex2_insert_new_first.outputs.result }}"
+          EX2_INSERT_NEW_LAST_RESULTS: "${{ steps.ex2_insert_new_last.outputs.result }}"
+          EX2_INSERT_MANY_RESULTS: "${{ steps.ex2_insert_many.outputs.result }}"
+          EX3_DELETE_MIDDLE_AND_LAST_RESULTS: "${{ steps.ex3_delete_middle_and_last.outputs.result }}"
+          EX3_DELETE_FIRST_RESULTS: "${{ steps.ex3_delete_first.outputs.result }}"
+          EX3_NOT_FOUND_RESULTS: "${{ steps.ex3_not_found.outputs.result }}"
+          EX3_NODE_GOES_BACK_TO_FREE_LIST_RESULTS: "${{ steps.ex3_node_goes_back_to_free_list.outputs.result }}"
+          EX4_LOAD_FROM_FILE_RESULTS: "${{ steps.ex4_load_from_file.outputs.result }}"
+          EX4_LOAD_TOO_MANY_RESULTS: "${{ steps.ex4_load_too_many.outputs.result }}"
+          EX4_LOAD_STARTS_EMPTY_RESULTS: "${{ steps.ex4_load_starts_empty.outputs.result }}"
+          EX4_FILE_NOT_FOUND_RESULTS: "${{ steps.ex4_file_not_found.outputs.result }}"
+          EX5_REVERSE_RESULTS: "${{ steps.ex5_reverse.outputs.result }}"
+          EX5_DATA_DOES_NOT_MOVE_RESULTS: "${{ steps.ex5_data_does_not_move.outputs.result }}"
+          EX5_REVERSE_SMALL_RESULTS: "${{ steps.ex5_reverse_small.outputs.result }}"
         with:
-          runners: ex1_initial_list,ex1_rows_are_separate,ex1_is_empty,ex1_is_full,ex2_traverse,ex2_traverse_empty,ex2_traverse_keeps_list,ex3_search,ex3_count_nodes,ex4_insert_front_empty,ex4_insert_front_sample,ex4_insert_front_when_full,ex5_insert_end_empty,ex5_insert_end_sample,ex5_insert_end_when_full,ex6_delete_middle_and_last,ex6_delete_first,ex6_not_found,ex6_node_goes_back_to_free_list
+          runners: ex1_initialise,ex1_initialise_resets,ex1_output_nodes,ex1_output_empty,ex2_insert_into_empty,ex2_insert_middle,ex2_insert_new_first,ex2_insert_new_last,ex2_insert_many,ex3_delete_middle_and_last,ex3_delete_first,ex3_not_found,ex3_node_goes_back_to_free_list,ex4_load_from_file,ex4_load_too_many,ex4_load_starts_empty,ex4_file_not_found,ex5_reverse,ex5_data_does_not_move,ex5_reverse_small
