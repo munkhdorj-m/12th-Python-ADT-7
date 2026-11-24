@@ -1,222 +1,236 @@
-# Linked List
+# Linked List 2
 
-Read the Abstract Data Types lecture (Linked List section) before you start.
+Python ADT PDF:     
 https://drive.google.com/file/d/1jXGQdSvuUYjGXl-PUuHMUzKWEBGQoARL/view?usp=sharing
+
+Python Exception handling:     
+https://drive.google.com/file/d/1JaPWKbfL4jOw8IPTJo67dFypR-BhDm3t/view?usp=sharing
 
 **Rules for this assignment**
 
-- The linked list is stored in a **2D array** called `LinkedList`. Each node is
-  a list of two items: `[Data, Pointer]`.
-- A pointer is the **index of the next node**. A pointer of `-1` means
-  "points to nothing".
-- `FirstNode` is the index of the first node in the linked list.
-- `FirstEmpty` is the index of the first node in the **free list** (the empty nodes).
-- Functions **return** their answer — do not print.
-- Every function that changes `LinkedList`, `FirstNode` or `FirstEmpty` needs:
-  `global LinkedList, FirstNode, FirstEmpty`
-
+- The linked list is stored in a global **2D array** called `LinkedList` with
+  **10** nodes. Each node is a list: `[Data, Pointer]`.
+- `FirstNode` stores the index of the first node in the linked list (`-1` = empty).
+- `FirstEmpty` stores the index of the first node in the **free list** (`-1` = full).
 
 **The example linked list**
 
-Exercises 2–6 are tested on this list. Notice the data is **not** in order in
-the array — only the **pointers** give the order.
+Most tests use this list. The data is **not** in order in the array — only the
+**pointers** give the order.
 
     Index   Data   Pointer
-      0      30       4
-      1      -1       3
-      2      10       5      ← FirstNode = 2
-      3      -1       6
-      4      40      -1
-      5      20       0
-      6      99       7      (old data — this node is in the free list)
-      7      -1      -1
+      0      25       3
+      1      -1       5
+      2      10       0      ← FirstNode = 2
+      3      40       6
+      4      -1       1      ← FirstEmpty = 4
+      5      -1       7
+      6      55      -1
+      7      -1       8
+      8      77       9      (old data — this node is in the free list)
+      9      -1      -1
 
-    FirstNode = 2       Linked list:  2 → 5 → 0 → 4        10, 20, 30, 40
-    FirstEmpty = 1      Free list:    1 → 3 → 6 → 7
+    Linked list:  2 → 0 → 3 → 6              10, 25, 40, 55
+    Free list:    4 → 1 → 5 → 7 → 8 → 9
 
 ---
 
 ## Exercise 1
 
-**Problem:**
+**(a)** Write program code for the procedure `Initialise()`.
 
-Set up an **empty** linked list with **8** nodes.
+`Initialise()`
 
-- `LinkedList` → a global 2D array of 8 nodes. Every node starts with data `-1`.
-  Each node points to the **next** node, and the last node points to `-1`.
-- `FirstNode` → `-1` (the linked list is empty)
-- `FirstEmpty` → `0` (every node is in the free list, starting at node 0)
+- Sets `LinkedList` to **10** nodes. Every node has data `-1` and points to
+  the **next** node. The last node points to `-1`.
+- Sets `FirstNode` to `-1` and `FirstEmpty` to `0`.
+- It must **reset** the list — calling it again empties a list that has items.
 
-The array must look like this:
+After `Initialise()`:
 
-    [[-1, 1], [-1, 2], [-1, 3], [-1, 4], [-1, 5], [-1, 6], [-1, 7], [-1, -1]]
+    [[-1, 1], [-1, 2], [-1, 3], [-1, 4], [-1, 5], [-1, 6], [-1, 7], [-1, 8], [-1, 9], [-1, -1]]
 
-Then write two functions:
+**(b)** Write program code for the procedure `OutputNodes()`.
 
-`IsEmpty()`
+`OutputNodes()`
 
-- Return `True` if the linked list has no nodes (`FirstNode` is `-1`), otherwise `False`
+- **Outputs** (prints) the data of every node in the linked list, in linked-list
+  order, **one per line**.
+- If the linked list is empty, outputs `Linked list is empty`
+- Must not change the linked list.
 
-`IsFull()`
+**Example (the example list):**
 
-- Return `True` if there are no free nodes left (`FirstEmpty` is `-1`), otherwise `False`
+    Input:
+      OutputNodes()
 
-**Careful:** build the array with a loop and `.append()`. Do **not** write
-`[[-1, -1]] * 8` — that makes 8 copies of the **same** row, so changing one
-row changes all of them.
+    Output:
+      10
+      25
+      40
+      55
 
 ---
 
 ## Exercise 2
 
-**Problem:**
+Write program code for the function `InsertInOrder(Item)`.
 
-`Traverse()`
+`InsertInOrder(Item)`
 
-Return a list of the data in the linked list, **in linked-list order**.
-Return `[]` if the list is empty. Do **not** change the linked list.
+- Inserts `Item` into the linked list so the list **stays in ascending order**.
+- Uses the node at `FirstEmpty` for the new item.
+- Returns `True` if the item was inserted, `False` if there are no free nodes.
 
-1. Start at `FirstNode`
-2. While the current pointer is not `-1`:
-    - add the data of the current node to your answer
-    - move to the next node: `Current = LinkedList[Current][1]`
+Think about **all** the places a new node can go:
+
+1. The list is **empty**
+2. The new item is **smaller** than the first item → it becomes the new first node
+3. **In the middle** → the previous node must point to the new node
+4. **At the end** → the new node points to `-1`
+
+If the same value is already in the list, put the new item **after** it.
 
 **Example (the example list):**
 
     Input:
-      print(Traverse())
+      print(InsertInOrder(30))
+      OutputNodes()
+      print(FirstEmpty)
 
     Output:
-      [10, 20, 30, 40]
+      True
+      10
+      25
+      30
+      40
+      55
+      1
 
-*Hint:* if your answer is `[30, 10, 40, 20, 99]` you are reading the array
-from top to bottom. Follow the **pointers** instead.
+What changed:
+
+    Index   Data   Pointer
+      0      25       4      ← used to point to 3, now points to the new node
+      4      30       3      ← the new node, points to 40
+
+*Hint:* take the node off the free list (`FirstEmpty = LinkedList[NewNode][1]`)
+**before** you change the new node's pointer.
 
 ---
 
 ## Exercise 3
 
-**Problem:**
+Write program code for the function `Delete(Item)`.
 
-Write two functions that follow the pointers, just like `Traverse()`.
+`Delete(Item)`
 
-`Search(Item)`
-
-- Return the **index** of the node that holds `Item`
-- Return `-1` if `Item` is not in the linked list
-
-`CountNodes()`
-
-- Return how many nodes are in the linked list
+- Removes the **first** node that holds `Item` from the linked list.
+- The deleted node is added to the **front** of the free list: its data is set
+  to `-1`, it points to the old `FirstEmpty`, and it becomes the new `FirstEmpty`.
+- Returns `True` if the item was deleted, `False` if `Item` is not in the linked
+  list (and nothing changes).
 
 **Example (the example list):**
 
-    Input:                 Output:
-      Search(20)             5
-      Search(40)             4
-      Search(99)             -1
-      CountNodes()           4
+    Input:
+      print(Delete(40))
+      OutputNodes()
+      print(FirstEmpty)
+      print(Delete(77))
 
-`Search(99)` is `-1`: node 6 still holds `99`, but node 6 is in the free
-list, **not** in the linked list. Only follow pointers from `FirstNode`.
+    Output:
+      True
+      10
+      25
+      55
+      3
+      False
+
+`Delete(77)` is `False` — node 8 holds `77`, but it is in the free list, not in
+the linked list.
+
+What changed after `Delete(40)`:
+
+    Index   Data   Pointer
+      0      25       6      ← skips over node 3
+      3      -1       4      ← deleted node, now at the front of the free list
+
+    Free list:  3 → 4 → 1 → 5 → 7 → 8 → 9
 
 ---
 
 ## Exercise 4
 
-**Problem:**
+Write program code for the function `LoadFromFile(FileName)`.
 
-`InsertFront(Item)`
+`LoadFromFile(FileName)`
 
-Add `Item` as the new **first** node. Return `True`, or `False` if there are no
-free nodes.
+- Calls `Initialise()` first, so the linked list starts empty.
+- Opens the text file `FileName`. Each line of the file holds one whole number.
+- Inserts each number into the linked list using `InsertInOrder()`.
+- If the linked list becomes full, the remaining numbers are not stored.
+- Returns the **number of items** that were stored in the linked list.
+- If the file does not exist, outputs `File not found` and returns `-1`.
+  Use **exception handling** (`try` / `except`).
 
-1. If there are no free nodes, return `False`
-2. Take the first free node: `NewNode = FirstEmpty`
-3. Move `FirstEmpty` to the next free node — **before** you change `NewNode`'s pointer!
-4. Store `Item` in the new node, and point it to the old first node
-5. The new node is now the first node: `FirstNode = NewNode`
+**Example:**
 
-**Example (the example list):**
+`numbers.txt` contains:
+
+    30
+    10
+    20
 
     Input:
-      print(InsertFront(5))
-      print(Traverse())
-      print(FirstNode, FirstEmpty)
+      print(LoadFromFile("numbers.txt"))
+      OutputNodes()
+      print(LoadFromFile("missing.txt"))
 
     Output:
-      True
-      [5, 10, 20, 30, 40]
-      1 3
+      3
+      10
+      20
+      30
+      File not found
+      -1
 
-Node 1 is now `[5, 2]` — it holds 5 and points to node 2 (the old first node).
+To try it yourself, create `numbers.txt` next to `assignment.py`.
 
 ---
 
 ## Exercise 5
 
-**Problem:**
+Write program code for the procedure `Reverse()`.
 
-`InsertEnd(Item)`
+`Reverse()`
 
-Add `Item` as the new **last** node. Return `True`, or `False` if there are no
-free nodes.
-
-1. If there are no free nodes, return `False`
-2. Take the first free node and move `FirstEmpty` on (like Exercise 4)
-3. Store `Item` in the new node, and set its pointer to `-1` — it will be last
-4. If the list was **empty**, the new node becomes `FirstNode`
-5. Otherwise follow the pointers to the **last** node (the one whose pointer
-   is `-1`), and point it to the new node
+- Reverses the order of the linked list by **changing the pointers only**.
+- The data must **not** move — every node keeps its data at the same index.
+- The free list must not change.
 
 **Example (the example list):**
 
     Input:
-      print(InsertEnd(50))
-      print(Traverse())
+      Reverse()
+      OutputNodes()
+      print(FirstNode)
 
     Output:
-      True
-      [10, 20, 30, 40, 50]
+      55
+      40
+      25
+      10
+      6
 
-Node 1 is now `[50, -1]`, and node 4 (holding 40) changed from `[40, -1]` to `[40, 1]`.
-
----
-
-## Exercise 6
-
-**Problem:**
-
-`Delete(Item)`
-
-Remove the node holding `Item` from the linked list. Return `True`, or `False`
-if `Item` is not in the list (and change nothing).
-
-1. Follow the pointers from `FirstNode`, remembering the **previous** node as
-   you go, until you find `Item` or reach `-1`
-2. Not found → return `False`
-3. If it is the **first** node → `FirstNode` moves to the next node
-4. Otherwise → the previous node's pointer **skips over** the deleted node
-5. Give the deleted node back to the **front** of the free list:
-   set its data to `-1`, point it to the old `FirstEmpty`, and make it the new `FirstEmpty`
-
-**Example (the example list):**
-
-    Input:
-      print(Delete(30))
-      print(Traverse())
-      print(FirstEmpty)
-
-    Output:
-      True
-      [10, 20, 40]
-      0
-
-What changed:
+After `Reverse()`:
 
     Index   Data   Pointer
-      0      -1       1      ← deleted node, now at the front of the free list
-      5      20       4      ← used to point to 0 (30), now skips to 4 (40)
+      0      25       2
+      2      10      -1      ← now the last node
+      3      40       0
+      6      55       3      ← FirstNode = 6
 
-    Free list:  0 → 1 → 3 → 6 → 7
+*Hint:* walk through the list with three variables — `Previous`, `Current` and
+`NextNode`. Save `NextNode` **before** you change `Current`'s pointer, or you
+lose the rest of the list.
 
