@@ -16,8 +16,15 @@ HINTS = [
 
     ["index out of range",
      "You used an index outside the array.\n"
-     "  - Did you fill LinkedList with 8 nodes at the start?\n"
+     "  - Does Initialise() fill LinkedList with 10 nodes?\n"
      "  - Check for full (FirstEmpty == -1) BEFORE taking a free node."],
+
+    ["invalid literal for int()",
+     "int() was given text that is not a whole number.\n"
+     "Remove the newline first:  int(Line.strip())"],
+
+    ["No such file",
+     "The file could not be opened. Put open() inside try / except FileNotFoundError."],
 
     ["'NoneType' object",
      "Something is None (nothing). A function probably forgot to 'return'\n"
