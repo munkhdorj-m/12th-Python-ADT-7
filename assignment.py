@@ -39,8 +39,3 @@ def LoadFromFile(FileName):
 def Reverse():
     # Write your code here
     pass
-
-
-if __name__ == "__main__":
-    # You can try your code here. Code here does not affect the tests.
-    pass
